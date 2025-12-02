@@ -116,7 +116,7 @@ Os dados utilizados são públicos e disponibilizados no Kaggle.
 
 👨‍💻 Autor
 
-Victor Gagliano
-📩 linkedin.com/in/…
+Victor Biscaia 
+📩 linkedin https://www.linkedin.com/in/victor-biscaia-097603371/
 📊 Análise de Dados | BI | Operações
 
