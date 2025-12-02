@@ -45,7 +45,7 @@ Necessidade de reclassificação + ajuste de thresholds.
 
 13,34k alarmes → potencial correlação com manutenção ou campanhas.
 
-![Dashboard Print](./DashBoard/print4.png)
+![Dashboard Print](./DashBoard/print3.png)
 
 
 📊 Dashboard / Relatório
