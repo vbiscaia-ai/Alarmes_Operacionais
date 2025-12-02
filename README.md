@@ -38,7 +38,6 @@ Indicativo de falhas de conectividade e firmware.
 
 🔹 Insight 2 — Severidade High (62,59%)
 
-Tendência de falsos positivos.
 
 Necessidade de reclassificação + ajuste de thresholds.
 
@@ -57,7 +56,7 @@ Overview — cenário geral, volume, severidade.
 
 Alarmes Offline — perfil de dispositivos e impacto operacional.
 
-Severidade High — análise de falsos positivos e eventos críticos.
+Severidade High — eventos críticos.
 
 Plano de Ação + Governança — responsáveis, métricas e cadência.
 
