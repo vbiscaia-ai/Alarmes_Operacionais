@@ -1,123 +1,198 @@
-## 📊 Alarmes Operacionais — Data Insights & BI
 
-Projeto de análise de alarmes industriais com foco na identificação de padrões críticos, redução de ruído operacional e geração de insights estratégicos para manutenção e tomada de decisão.
+## 📊 Dashboard — Análise Estratégica
 
-Transformação de dados brutos → ETL estruturado → Modelagem analítica → Dashboard executivo.
 
-## 🎯 Objetivo
 
-Analisar registros históricos de alarmes industriais para:
+## 📁 Fonte de Dados
 
-Identificar padrões temporais
-
-Detectar concentração de severidades críticas
-
-Avaliar possíveis correlações com ciclos operacionais
-
-Apoiar estratégias de manutenção preventiva
-
-Reduzir impacto operacional e downtime
-
-## 📂 Fonte de Dados
-
-Dataset público disponível no Kaggle:
+Dataset utilizado:
 
 Industrial Alarm Monitoring Dataset (2018–2024)
-https://www.kaggle.com/datasets/sudhanvahg/industrial-alarm-monitoring-dataset-2018-2024
+Disponível no Kaggle:
 
-## 🏗️ Estrutura do Projeto
-Alarmes_Operacionais/
-│
-├── DashBoard/
-│   └── print3.png
-│
-├── PowerQuery/
-│   └── ScriptM.lua
-│
-├── Dados/
-│
-└── README.md
+🔗 https://www.kaggle.com/datasets/sudhanvahg/industrial-alarm-monitoring-dataset-2018-2024
 
-Camadas do projeto:
+O conjunto de dados contém registros históricos de alarmes industriais coletados entre 2018 e 2024, incluindo:
 
-Raw → Dataset original Kaggle
+ProcessID — Identificador único do processo
 
-Transformação (ETL) → Power Query (M)
+AssetID — Identificador do ativo
 
-Modelagem → Estrutura otimizada para análise temporal
+AlarmSeverityName — Severidade do alarme
 
-Consumo → Dashboard Power BI
+State — Transição do estado do alarme
 
-## 🛠️ ETL & Tratamento de Dados
+TransactionMessage — Mensagem descritiva
 
-Principais transformações aplicadas:
+Stage — Estágio do alarme
 
-Promoção de cabeçalhos
+AlarmClassName — Classe do alarme
 
-Padronização de tipos de dados
+DateTime — Timestamp do evento
 
-Separação de Data e Hora
+Variáveis temporais (Ano, Mês, Dia, Hora, Estação)
 
-Extração estruturada do tipo de alarme
+A base apresenta características típicas de dados industriais reais:
 
-Remoção de colunas irrelevantes
+Alta cardinalidade textual
 
-Deduplicação por ProcessID
+Eventos recorrentes
 
-Tratamento de inconsistências textuais
+Necessidade de padronização
 
-Padronização de categorias
+Estrutura não modelada para BI
 
-✔ 13.340 alarmes tratados após limpeza
-✔ Estrutura pronta para análise temporal e categórica
+## 🔄 Pipeline de Dados (ETL)
+
+O processo de ETL foi realizado no Power Query (Linguagem M) dentro do Power BI.
 
 ## 🧼 Script Completo — Power Query (M)
 
 [ScriptM.lua — Power Query](./PowerQuery/ScriptM.lua)
 
 
-## 📊 Dashboard — Análise Estratégica
+## 📥 Extração (Extract)
+
+Importação do arquivo CSV bruto
+
+Promoção automática de cabeçalhos
+
+Definição manual de tipos de dados
+
+## 🧹 Transformação (Transform)
+
+Principais etapas aplicadas:
+
+1️⃣ Padronização de Tipos
+
+Conversão estruturada de campos datetime, categóricos e numéricos.
+
+2️⃣ Separação de Data e Hora
+
+A coluna DateTime foi dividida em:
+
+Data
+
+Hora
+
+Permitindo análise temporal detalhada.
+
+3️⃣ Tratamento da Mensagem do Alarme
+
+A coluna TransactionMessage foi:
+
+Dividida por delimitador
+
+Reestruturada
+
+Consolidada no campo Type_of_alarm
+
+Objetivo: reduzir ruído textual e permitir agrupamentos estratégicos.
+
+4️⃣ Limpeza Estrutural
+
+Remoção de colunas não estratégicas
+
+Exclusão de duplicatas com base no ProcessID
+
+Reorganização estrutural do dataset
+
+Padronização de categorias
+
+## 📤 Carga (Load)
+
+Após tratamento:
+
+Dados carregados no modelo do Power BI
+
+Criação de medidas DAX
+
+Modelagem temporal
+
+Construção de dashboard executivo
+
+## 📊 Dashboard Executivo
 
 ![Dashboard Print](./DashBoard/print3.png)
 
-## 🔎 Principais Insights Identificados
+O dashboard foi desenvolvido para oferecer visão estratégica da operação, destacando:
 
-13,34k alarmes analisados
+Volume total de alarmes
 
-Concentração de eventos em horários específicos (possível correlação com turnos operacionais)
+Distribuição por severidade
 
-Severidades críticas associadas a tipos específicos de alarmes
-
-Indícios de correlação com ciclos de manutenção
-
-Padrões sazonais que sugerem impacto operacional previsível
-
-## 📈 Valor de Negócio
-
-A análise permite:
-
-Priorização de alarmes críticos
-
-Redução de alarmes redundantes
-
-Planejamento de manutenção preventiva
-
-Redução de downtime operacional
-
-Melhoria no tempo de resposta a incidentes
-
-Apoio à tomada de decisão orientada por dados
-
-## 🧠 Competências Demonstradas
-
-ETL com Power Query (M)
-
-Modelagem analítica para BI
+Concentração por tipo
 
 Análise temporal
 
-Tratamento de dados
+Ranking de ativos críticos
 
-Storytelling com dados
+## 🔍 Insight Estratégico
 
-Organização de projeto (Raw → Transformação → Consumo)
+Foram identificados 13,34 mil alarmes no período analisado, com concentração relevante em determinados ativos e categorias.
+
+Essa volumetria indica:
+
+Possível correlação com ciclos de manutenção
+
+Potencial impacto de campanhas operacionais
+
+Indícios de padrão estrutural, não apenas eventos isolados
+
+A concentração de eventos severos em ativos específicos sugere necessidade de:
+
+Revisão de manutenção preventiva
+
+Monitoramento direcionado
+
+Avaliação de confiabilidade operacional
+
+## 📈 Métricas Desenvolvidas
+
+Frequência de alarmes por ativo
+
+Distribuição por severidade
+
+Análise temporal (ano, mês, estação)
+
+Ranking de ativos críticos
+
+Identificação de padrões de recorrência
+
+## 🚀 Próxima Evolução do Projeto
+
+Planejamento das próximas etapas:
+
+Cálculo de MTBF (Mean Time Between Failures)
+
+Índice de criticidade ponderado
+
+Análise de reincidência por ativo
+
+Modelo preditivo simplificado
+
+Simulação de impacto financeiro (downtime estimado)
+
+## 🛠 Tecnologias Utilizadas
+
+Power BI
+
+Power Query (Linguagem M)
+
+DAX
+
+Modelagem Analítica
+
+## 🎯 Objetivo Estratégico
+
+Demonstrar capacidade de:
+
+Trabalhar com dados industriais reais
+
+Estruturar base bruta via ETL
+
+Criar métricas de confiabilidade
+
+Traduzir dados operacionais em decisões estratégicas
+
+Simular ambiente corporativo real
