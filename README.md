@@ -1,10 +1,10 @@
-📊 Alarmes Operacionais — Data Insights & BI
+## 📊 Alarmes Operacionais — Data Insights & BI
 
 Projeto de análise de alarmes industriais com foco na identificação de padrões críticos, redução de ruído operacional e geração de insights estratégicos para manutenção e tomada de decisão.
 
 Transformação de dados brutos → ETL estruturado → Modelagem analítica → Dashboard executivo.
 
-🎯 Objetivo do Projeto
+## 🎯 Objetivo
 
 Analisar registros históricos de alarmes industriais para:
 
@@ -18,26 +18,14 @@ Apoiar estratégias de manutenção preventiva
 
 Reduzir impacto operacional e downtime
 
-📂 Fonte de Dados
+## 📂 Fonte de Dados
 
 Dataset público disponível no Kaggle:
 
-🔗 Industrial Alarm Monitoring Dataset (2018–2024)
+Industrial Alarm Monitoring Dataset (2018–2024)
 https://www.kaggle.com/datasets/sudhanvahg/industrial-alarm-monitoring-dataset-2018-2024
 
-A base contém registros históricos de alarmes industriais com:
-
-Data e hora do evento
-
-Severidade do alarme
-
-Identificação de processo
-
-Classe do alarme
-
-Informações temporais derivadas (ano, mês, dia, estação, hora)
-
-🏗️ Arquitetura do Projeto
+## 🏗️ Estrutura do Projeto
 Alarmes_Operacionais/
 │
 ├── DashBoard/
@@ -47,11 +35,10 @@ Alarmes_Operacionais/
 │   └── ScriptM.lua
 │
 ├── Dados/
-│   └── preprocessed_trendedpointalarm.csv
 │
 └── README.md
 
-Camadas:
+Camadas do projeto:
 
 Raw → Dataset original Kaggle
 
@@ -61,7 +48,7 @@ Modelagem → Estrutura otimizada para análise temporal
 
 Consumo → Dashboard Power BI
 
-🛠️ ETL & Tratamento de Dados (Power Query)
+## 🛠️ ETL & Tratamento de Dados
 
 Principais transformações aplicadas:
 
@@ -84,15 +71,16 @@ Padronização de categorias
 ✔ 13.340 alarmes tratados após limpeza
 ✔ Estrutura pronta para análise temporal e categórica
 
-🧼 Script Completo — Power Query (M)
+## 🧼 Script Completo — Power Query (M)
 
-Arquivo com o script completo de transformação:
+[ScriptM.lua — Power Query](./PowerQuery/ScriptM.lua)
 
-🔗 ScriptM.lua — Power Query
 
-📊 Dashboard — Análise Estratégica
+## 📊 Dashboard — Análise Estratégica
 
-🔎 Principais Insights Identificados
+![Dashboard Print](./DashBoard/print3.png)
+
+## 🔎 Principais Insights Identificados
 
 13,34k alarmes analisados
 
@@ -104,7 +92,7 @@ Indícios de correlação com ciclos de manutenção
 
 Padrões sazonais que sugerem impacto operacional previsível
 
-📈 Valor de Negócio
+## 📈 Valor de Negócio
 
 A análise permite:
 
@@ -120,18 +108,16 @@ Melhoria no tempo de resposta a incidentes
 
 Apoio à tomada de decisão orientada por dados
 
-🧠 Competências Demonstradas
+## 🧠 Competências Demonstradas
 
 ETL com Power Query (M)
-
-Tratamento e padronização de dados
 
 Modelagem analítica para BI
 
 Análise temporal
 
+Tratamento de dados
+
 Storytelling com dados
 
 Organização de projeto (Raw → Transformação → Consumo)
-
-Visão orientada a negócio
