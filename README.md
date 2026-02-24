@@ -1,122 +1,207 @@
-Alarmes Operacionais — Data Insights & BI
+## 📊 Industrial Alarm Monitoring — Análise de Confiabilidade Operacional (2018–2024)
+📌 Visão Geral
 
-Este projeto analisa alarmes operacionais, identifica padrões e propõe ações para reduzir impacto de falhas.
-O foco é transformar dados brutos → insights executáveis → plano operacional.
+Este projeto tem como objetivo analisar eventos de alarmes operacionais em ambiente industrial, identificando padrões de recorrência, criticidade e concentração por ativo ao longo do tempo.
 
-🗂️ Fonte de Dados
+A proposta é transformar dados brutos de monitoramento industrial em insights estratégicos para:
 
-Os dados utilizados são públicos e disponíveis no Kaggle.
-🔗 Dataset anonimizado com registros de trend/point/alarmes.
+Apoiar decisões de manutenção
 
-https://www.kaggle.com/datasets/sudhanvahg/industrial-alarm-monitoring-dataset-2018-2024
+Identificar ativos críticos
 
-⚠️ Nenhuma informação sensível ou proprietária foi utilizada.
+Melhorar confiabilidade operacional
 
-🎯 Objetivos
+Reduzir reincidência de eventos severos
 
-Entender comportamento de alarmes por severidade, classe e período.
+O projeto simula um cenário real de ambiente industrial, onde os dados não chegam estruturados para análise.
 
-Detectar picos operacionais e anomalias.
+## 📁 Fonte de Dados
 
-Criar plano de ação orientado a dados (data-driven).
+Dataset utilizado:
 
-Estabelecer governança e monitoramento contínuo.
+Industrial Alarm Monitoring Dataset (2018–2024)
+Disponível no Kaggle:
 
-🧰 Stack Tecnológica
-Tecnologia	Função
-Power BI	Modelagem, DAX e dashboards
-Power Query (M)	Refino, limpeza e padronização
-Excel / CSV	Entrada de dados e validações
+🔗 https://www.kaggle.com/datasets/sudhanvahg/industrial-alarm-monitoring-dataset-2018-2024
 
-📌 Estrutura das Análises
+O conjunto de dados contém registros históricos de alarmes industriais coletados entre 2018 e 2024, incluindo:
 
-🔹 Insight 1 — Alarmes Offline (68,33%)
+ProcessID — Identificador único do processo
 
-Maior volume do dataset.
+AssetID — Identificador do ativo
 
-Indicativo de falhas de conectividade e firmware.
+AlarmSeverityName — Severidade do alarme
 
-🔹 Insight 2 — Severidade High (62,59%)
+State — Transição do estado do alarme
 
+TransactionMessage — Mensagem descritiva
 
-Necessidade de reclassificação + ajuste de thresholds.
+Stage — Estágio do alarme
 
-🔹 Insight 3 — Pico de Junho
+AlarmClassName — Classe do alarme
 
-13,34k alarmes → potencial correlação com manutenção ou campanhas.
+DateTime — Timestamp do evento
 
-![Dashboard Print](./DashBoard/print3.png)
+Variáveis temporais (Ano, Mês, Dia, Hora, Estação)
 
+A base apresenta características típicas de dados industriais reais:
 
-📊 Dashboard / Relatório
+Alta cardinalidade textual
 
-O relatório em Power BI foi dividido em 4 páginas:
+Eventos recorrentes
 
-Overview — cenário geral, volume, severidade.
+Necessidade de padronização
 
-Alarmes Offline — perfil de dispositivos e impacto operacional.
+Estrutura não modelada para BI
 
-Severidade High — eventos críticos.
+## 🔄 Pipeline de Dados (ETL)
 
-Plano de Ação + Governança — responsáveis, métricas e cadência.
+O processo de ETL foi realizado no Power Query (Linguagem M) dentro do Power BI.
 
-📋 Plano de Ação (resumo)
+📄 Script completo disponível em:
 
-1️⃣ Alarmes Offline
-✔ Revisão de conectividade e firmware
-✔ Responsável: TI/Infra
-✔ Meta: reduzir >30% em 30 dias
-✔ Prazo: 15d diagnóstico / 45d estabilização
+👉 ScriptM.lua — Power Query
 
-2️⃣ Severidade High
-✔ Reclassificação e ajuste de threshold
-✔ Responsável: Engenharia / Automação
-✔ Meta: -25% falsos positivos
-✔ Prazo: 30 dias
+ 📥 Extração (Extract)
 
-3️⃣ Pico Operacional (Junho)
-✔ Análise de campanhas + manutenção
-✔ Responsável: Operações + Engenharia
-✔ Meta: 3 causas raiz + 2 ações corretivas
-✔ Prazo: 14d RCA / 45d implantação
+Importação do arquivo CSV bruto
 
-🧭 Governança
+Promoção automática de cabeçalhos
 
-Ritmo: Weekly Meeting (30 min)
+Definição manual de tipos de dados
 
-KPIs:
+🧹 Transformação (Transform)
 
-Total de alarmes/dia
+Principais etapas aplicadas:
 
-% alarmes offline
+1️⃣ Padronização de Tipos
 
-% severidade high
+Conversão estruturada de campos datetime, categóricos e numéricos.
 
-MTTR por alarme
+2️⃣ Separação de Data e Hora
 
-Ferramentas: Dashboard + histórico de eventos
+A coluna DateTime foi dividida em:
 
-🧼 Power Query — Script (M)
+Data
 
-[ScriptM.lua — Power Query](./PowerQuery/ScriptM.lua)
+Hora
 
+Permitindo análise temporal detalhada.
 
-📁 Estrutura do Repositório
-📦 alarms-bi
-├── data/                 # CSV / dataset Kaggle
-├── powerquery/           # Scripts M
-├── dashboards/           # PBIX, visualizações
-├── docs/                 # Imagens e relatórios
-└── README.md
+3️⃣ Tratamento da Mensagem do Alarme
 
-🔐 Licença
+A coluna TransactionMessage foi:
 
-Este projeto é de caráter educacional.
-Os dados utilizados são públicos e disponibilizados no Kaggle.
+Dividida por delimitador
 
-👨‍💻 Autor
+Reestruturada
 
-Victor Biscaia 
-📩 linkedin https://www.linkedin.com/in/victor-biscaia-097603371/
-📊 Análise de Dados | BI | Operações
+Consolidada no campo Type_of_alarm
 
+Objetivo: reduzir ruído textual e permitir agrupamentos estratégicos.
+
+4️⃣ Limpeza Estrutural
+
+Remoção de colunas não estratégicas
+
+Exclusão de duplicatas com base no ProcessID
+
+Reorganização estrutural do dataset
+
+Padronização de categorias
+
+📤 Carga (Load)
+
+Após tratamento:
+
+Dados carregados no modelo do Power BI
+
+Criação de medidas DAX
+
+Modelagem temporal
+
+Construção de dashboard executivo
+
+## 📊 Dashboard Executivo
+
+O dashboard foi desenvolvido para oferecer visão estratégica da operação, destacando:
+
+Volume total de alarmes
+
+Distribuição por severidade
+
+Concentração por tipo
+
+Análise temporal
+
+Ranking de ativos críticos
+
+🔍 Insight Estratégico
+
+Foram identificados 13,34 mil alarmes no período analisado, com concentração relevante em determinados ativos e categorias.
+
+Essa volumetria indica:
+
+Possível correlação com ciclos de manutenção
+
+Potencial impacto de campanhas operacionais
+
+Indícios de padrão estrutural, não apenas eventos isolados
+
+A concentração de eventos severos em ativos específicos sugere necessidade de:
+
+Revisão de manutenção preventiva
+
+Monitoramento direcionado
+
+Avaliação de confiabilidade operacional
+
+📈 Métricas Desenvolvidas
+
+Frequência de alarmes por ativo
+
+Distribuição por severidade
+
+Análise temporal (ano, mês, estação)
+
+Ranking de ativos críticos
+
+Identificação de padrões de recorrência
+
+## 🚀 Próxima Evolução do Projeto
+
+Planejamento das próximas etapas:
+
+Cálculo de MTBF (Mean Time Between Failures)
+
+Índice de criticidade ponderado
+
+Análise de reincidência por ativo
+
+Modelo preditivo simplificado
+
+Simulação de impacto financeiro (downtime estimado)
+
+## 🛠 Tecnologias Utilizadas
+
+Power BI
+
+Power Query (Linguagem M)
+
+DAX
+
+Modelagem Analítica
+
+## 🎯 Objetivo Estratégico
+
+Demonstrar capacidade de:
+
+Trabalhar com dados industriais reais
+
+Estruturar base bruta via ETL
+
+Criar métricas de confiabilidade
+
+Traduzir dados operacionais em decisões estratégicas
+
+Simular ambiente corporativo real
